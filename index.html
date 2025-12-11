@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iglesia del Evangelio del Dios</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración Personalizada de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a', // Slate 900
+                        secondary: '#334155', // Slate 700
+                        accent: '#d97706', // Amber 600
+                        gold: '#fbbf24', // Amber 400
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome (Iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+
+    <style>
+        /* Estilos personalizados */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .overlay-gradient {
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.8));
+        }
+
+        /* Flechas Swiper personalizadas */
+        .swiper-button-next, .swiper-button-prev {
+            color: #fbbf24 !important; /* Color dorado */
+            background: rgba(15, 23, 42, 0.8);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+        
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 1.2rem !important;
+            font-weight: bold;
+        }
+
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            background: #d97706;
+            color: white !important;
+            transform: scale(1.1);
+        }
+        
+        .swiper-pagination-bullet-active {
+            background-color: #d97706 !important;
+        }
+
+        /* Estilo para los inputs del formulario - Mejorando el enfoque */
+        .input-church-style {
+            @apply w-full p-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-gold focus:border-gold transition duration-300;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-slate-800 font-sans antialiased selection:bg-accent selection:text-white">
+
+    <!-- Navegación -->
+    <header class="fixed w-full z-50 transition-all duration-300 bg-primary/95 backdrop-blur-sm shadow-lg border-b border-white/10">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="relative overflow-hidden rounded-full border-2 border-accent">
+                    <img src="logo_iglesia2.jpg" alt="Logo" class="h-12 w-12 object-cover transform group-hover:scale-110 transition duration-500">
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-white font-heading font-bold text-lg leading-tight uppercase tracking-wide">Iglesia del Evangelio de Dios</span>
+                    <span class="text-gold text-xs font-medium tracking-widest uppercase">Cristo Es El Todo y En Todo</span>
+                </div>
+            </a>
+            
+            <!-- Menú Escritorio -->
+            <div class="hidden md:flex items-center space-x-8 text-sm font-semibold uppercase tracking-wider text-gray-300">
+                <a href="#inicio" class="hover:text-gold transition-colors">Inicio</a>
+                <a href="#mision-vision" class="hover:text-gold transition-colors">Nosotros</a>
+                <a href="#predicas" class="hover:text-gold transition-colors">Predicaciones</a>
+                <a href="#recursos" class="hover:text-gold transition-colors">Recursos</a>
+                <a href="#contacto" class="px-5 py-2 bg-accent text-white rounded-full hover:bg-gold hover:text-primary transition-all shadow-lg transform hover:-translate-y-0.5">Visítanos</a>
+            </div>
+
+            <!-- Botón Móvil -->
+            <button id="mobile-menu-button" class="md:hidden text-white hover:text-accent transition">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-primary border-t border-gray-800">
+            <div class="px-4 py-6 space-y-3 text-center">
+                <a href="#inicio" class="block py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition">Inicio</a>
+                <a href="#mision-vision" class="block py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition">Nosotros</a>
+                <a href="#predicas" class="block py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition">Predicaciones</a>
+                <a href="#recursos" class="block py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition">Recursos</a>
+                <a href="#contacto" class="block py-3 text-accent font-bold bg-white/5 rounded-lg">Contacto</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Inicio (Hero) -->
+        <section id="inicio" class="relative min-h-screen flex items-center justify-center px-4 overflow-hidden">
+            <!-- Video Background -->
+            <video autoplay muted loop playsinline class="video-background">
+                <source src="6860419-uhd_3840_2160_25fps.mp4" type="video/mp4">
+                Tu navegador no soporta video HTML5.
+            </video>
+            <!-- Overlay oscuro para legibilidad -->
+            <div class="absolute inset-0 bg-primary/60 mix-blend-multiply z-0"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent z-0"></div>
+
+            <div class="relative z-10 text-center max-w-4xl mx-auto px-6">
+                <div class="inline-block px-3 py-1 mb-6 border border-gold/50 rounded-full bg-black/30 backdrop-blur-md">
+                    <span class="text-gold text-sm font-semibold uppercase tracking-widest">Bienvenidos a Casa</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-heading font-extrabold text-white mb-6 leading-tight drop-shadow-lg">
+                    Donde la Fe se Vive <br> y el Amor se <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold to-orange-400">Comparte</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                    Somos una familia imperfecta siguiendo a un Dios perfecto. Únete a nosotros para encontrar propósito y esperanza en Cristo Jesús.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#predicas" class="px-8 py-4 bg-accent text-white rounded-full font-bold shadow-lg hover:bg-white hover:text-accent transition-all duration-300 flex items-center justify-center gap-2">
+                        <i class="fas fa-play-circle"></i> Ver Prédicas
+                    </a>
+                    <a href="#contacto" class="px-8 py-4 bg-transparent border-2 border-white text-white rounded-full font-bold hover:bg-white hover:text-primary transition-all duration-300">
+                        Horarios y Ubicación
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Misión y Visión -->
+        <section id="mision-vision" class="py-20 bg-white relative">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-accent font-bold tracking-widest uppercase text-sm mb-2">Nuestra Identidad</h2>
+                    <h3 class="text-3xl md:text-4xl font-heading font-bold text-primary">El Corazón de Nuestra Iglesia</h3>
+                    <div class="w-24 h-1 bg-gold mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-10 lg:gap-16">
+                    <!-- Misión -->
+                    <div class="group bg-white p-8 rounded-2xl shadow-xl border border-gray-100 hover:border-gold/30 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h3 class="text-2xl font-heading font-bold mb-4 text-primary">Nuestra Misión</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Llevar el mensaje transformador del Evangelio a todas las naciones, haciendo discípulos de Jesucristo y edificando a Su cuerpo para la gloria eterna de Dios.
+                        </p>
+                    </div>
+
+                    <!-- Visión -->
+                    <div class="group bg-white p-8 rounded-2xl shadow-xl border border-gray-100 hover:border-gold/30 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="w-16 h-16 bg-blue-50 text-primary rounded-2xl flex items-center justify-center mb-6 text-3xl group-hover:bg-accent group-hover:text-white transition-colors duration-300">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 class="text-2xl font-heading font-bold mb-4 text-primary">Nuestra Visión</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Ser una comunidad vibrante, apasionada por la adoración genuina, profunda en el estudio de la Palabra y activa en el servicio, transformando nuestro entorno con el amor de Cristo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Declaración de Fe (Estilo Moderno) -->
+        <section id="fe" class="py-16 bg-secondary text-white relative overflow-hidden">
+            <!-- Pattern de fondo sutil -->
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#fbbf24 1px, transparent 1px); background-size: 30px 30px;"></div>
+            
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="max-w-4xl mx-auto bg-primary/50 backdrop-blur-sm p-10 rounded-3xl border border-white/10 shadow-2xl">
+                    <div class="flex items-center justify-center mb-8">
+                        <i class="fas fa-bible text-4xl text-gold"></i>
+                    </div>
+                    <h2 class="text-3xl font-heading font-bold text-center mb-8">Lo Que Creemos</h2>
+                    <div class="space-y-6 text-gray-200 text-lg leading-relaxed text-center">
+                        <p>Creemos en un solo Dios, eternamente existente en tres personas: el Padre, el Hijo y el Espíritu Santo. La Biblia es nuestra autoridad final.</p>
+                        <hr class="border-white/20 w-1/3 mx-auto">
+                        <p>Creemos en la deidad de Jesucristo, Su sacrificio expiatorio y Su resurrección poderosa que nos da vida eterna por gracia mediante la fe.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Predicaciones y Multimedia -->
+        <section id="predicas" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                    <div>
+                        <h2 class="text-accent font-bold uppercase text-sm mb-2">Edifícate</h2>
+                        <h3 class="text-3xl md:text-4xl font-heading font-bold text-primary">Mensajes Recientes</h3>
+                    </div>
+                    <a href="https://www.youtube.com/channel/TU_CANAL" target="_blank" class="hidden md:inline-flex items-center text-primary font-bold hover:text-accent transition">
+                        Visitar canal de YouTube <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <!-- Slider Videos -->
+                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg p-2 md:p-4">
+                        <div class="swiper videosSwiper rounded-xl overflow-hidden shadow-inner bg-black">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <video class="w-full h-[300px] md:h-[400px] object-cover" controls poster="poster_placeholder.jpg">
+                                        <source src="predicacion2.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="bg-primary text-white p-4">
+                                        <h4 class="font-bold">El Poder de la Fe</h4>
+                                        <p class="text-sm text-gray-400">Pastor Principal • Domingo Pasado</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <video class="w-full h-[300px] md:h-[400px] object-cover" controls>
+                                        <source src="predicacion3.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="bg-primary text-white p-4">
+                                        <h4 class="font-bold">Caminando en Esperanza</h4>
+                                        <p class="text-sm text-gray-400">Estudio Bíblico</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <video class="w-full h-[300px] md:h-[400px] object-cover" controls>
+                                        <source src="predicacion1.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="bg-primary text-white p-4">
+                                        <h4 class="font-bold">La Gracia Inmerecida</h4>
+                                        <p class="text-sm text-gray-400">Servicio Especial</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Multimedia -->
+                    <div class="space-y-8">
+                        <!-- En Vivo Card -->
+                        <div class="bg-gradient-to-br from-red-600 to-red-700 rounded-2xl p-6 text-white shadow-lg text-center relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 p-4 opacity-20 transform group-hover:scale-110 transition duration-500">
+                                <i class="fas fa-broadcast-tower text-6xl"></i>
+                            </div>
+                            <div class="relative z-10">
+                                <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-4 inline-block animate-pulse">En Directo</span>
+                                <h3 class="text-2xl font-bold mb-2">Transmisión Online</h3>
+                                <p class="text-red-100 mb-6 text-sm">Únete a nosotros para adorar en tiempo real todos los domingos.</p>
+                                <a href="https://www.youtube.com/channel/TU_CANAL" target="_blank" class="inline-block w-full bg-white text-red-600 font-bold py-3 rounded-lg hover:bg-gray-100 transition shadow-md">
+                                    <i class="fab fa-youtube mr-2"></i> Ver Ahora
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Galería Mini -->
+                        <div class="bg-white rounded-2xl shadow-lg p-6">
+                            <h4 class="font-bold text-primary mb-4 border-b pb-2">Vida en la Iglesia</h4>
+                            <div class="swiper gallerySwiper rounded-lg h-48">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide"><img src="accion de gracia1.jpg" alt="Evento" class="w-full h-full object-cover"></div>
+                                    <div class="swiper-slide"><img src="accion de gracia2.jpg" alt="Evento" class="w-full h-full object-cover"></div>
+                                    <div class="swiper-slide"><img src="evento3.jpg" alt="Evento" class="w-full h-full object-cover"></div>
+                                </div>
+                                <div class="swiper-pagination"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recursos (Cards Mejoradas) -->
+        <section id="recursos" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-heading font-bold text-primary">Recursos para tu Crecimiento</h2>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Card 1 -->
+                    <a href="#" class="group p-6 bg-gray-50 rounded-xl hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100">
+                        <div class="w-12 h-12 bg-accent/10 text-accent rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent group-hover:text-white transition-colors">
+                            <i class="fas fa-book-open text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-2">Estudios Bíblicos</h3>
+                        <p class="text-sm text-gray-500">Guías detalladas para profundizar en las Escrituras.</p>
+                    </a>
+
+                    <!-- Card 2 -->
+                    <a href="#" class="group p-6 bg-gray-50 rounded-xl hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100">
+                        <div class="w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center mb-4 group-hover:bg-green-600 group-hover:text-white transition-colors">
+                            <i class="fas fa-newspaper text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-2">Artículos de Fe</h3>
+                        <p class="text-sm text-gray-500">Reflexiones y noticias actuales desde una perspectiva bíblica.</p>
+                    </a>
+
+                    <!-- Card 3 -->
+                    <a href="#" class="group p-6 bg-gray-50 rounded-xl hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100">
+                        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center mb-4 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                            <i class="fas fa-microphone text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-2">Podcast</h3>
+                        <p class="text-sm text-gray-500">Escucha mensajes inspiradores mientras vas de camino.</p>
+                    </a>
+
+                    <!-- Card 4 -->
+                    <a href="#" class="group p-6 bg-gray-50 rounded-xl hover:bg-white hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100">
+                        <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-lg flex items-center justify-center mb-4 group-hover:bg-pink-600 group-hover:text-white transition-colors">
+                            <i class="fas fa-images text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-2">Galería Multimedia</h3>
+                        <p class="text-sm text-gray-500">Revive los mejores momentos de nuestra comunidad.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Contacto y Ubicación (Actualizada con Formulario) -->
+        <section id="contacto" class="bg-primary text-white py-20 border-t border-gray-800">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <!-- Columna de Información (Izquierda) -->
+                    <div>
+                        <h2 class="text-3xl font-heading font-bold mb-6">Te Esperamos con los Brazos Abiertos</h2>
+                        <p class="text-gray-400 mb-8">No importa tu historia, aquí tienes un lugar. Ven tal como eres.</p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center mt-1 shrink-0">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-lg text-white">Ubicación</h4>
+                                    <p class="text-gray-400">Panamá, Colón, Puerto Pilón, Diagonal a la Corregiduria. (9674+G3W, Puerto Pilón, Provincia de Colón)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center mt-1 shrink-0">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-lg text-white">Horarios de Reunión</h4>
+                                    <p class="text-gray-400"><strong class="text-white">Domingos:</strong> 2:00 PM A 3:00 PM - Escuela Dominical / 3:00 PM A 5:00 PM - Culto Dominical.</p>
+                                    <p class="text-gray-400"><strong class="text-white">Lunes:</strong> 8:00 PM a 10:00 PM - Escuela de Ministerio.</p>
+                                    <p class="text-gray-400"><strong class="text-white">Martes:</strong> 6:00 PM A 8:00 PM - Culto de Oración / 8:00 PM A 10:00 PM - Escuela de Ministerio.</p>
+                                    <p class="text-gray-400"><strong class="text-white">Miércoles:</strong> 7:00 PM A 9:00 PM - Culto / 9:00 PM A 10:00 PM - Escuela de Ministerio.</p>
+                                    <p class="text-gray-400"><strong class="text-white">Jueves:</strong> 8:00 PM A 9:00 PM - Escuela de Ministerio.</p>
+                                    <p class="text-gray-400"><strong class="text-white">Viernes:</strong> 12:00 AM - Vigilia</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 rounded-full bg-accent flex items-center justify-center mt-1 shrink-0">  
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-lg text-white">Contacto</h4>
+                                    <p class="text-gray-400">iglesia_evangeliodedios@gmail.com</p>
+                                    <p class="text-gray-400">+ (507) 6652-7493</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Columna de Formulario de Contacto (Derecha) - ¡MEJORADO! -->
+                    <div class="bg-gradient-to-br from-secondary/90 to-primary p-8 rounded-3xl shadow-2xl border-b-8 border-r-4 border-gold/50">
+                        <div class="flex items-center space-x-3 mb-6">
+                            <i class="fas fa-paper-plane text-2xl text-accent"></i>
+                            <h3 class="text-2xl font-heading font-bold text-gold">Envíanos un Mensaje</h3>
+                        </div>
+                        
+                        <!-- Formulario de Contacto. ¡IMPORTANTE! Reemplaza "your_form_id" con tu ID de Formspree -->
+                        <form action="https://formspree.io/f/your_form_id" method="POST" class="space-y-4">
+                            <!-- Nombre -->
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Tu Nombre</label>
+                                <input type="text" id="name" name="name" required class="input-church-style">
+                            </div>
+
+                            <!-- Email -->
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Tu Email</label>
+                                <input type="email" id="_replyto" name="_replyto" required class="input-church-style">
+                            </div>
+
+                            <!-- Asunto (Opcional) -->
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-300 mb-1">Asunto</label>
+                                <input type="text" id="subject" name="subject" class="input-church-style">
+                            </div>
+
+                            <!-- Mensaje -->
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Mensaje</label>
+                                <textarea id="message" name="message" rows="4" required class="input-church-style resize-none"></textarea>
+                            </div>
+
+                            <!-- Botón de Envío -->
+                            <button type="submit" class="w-full bg-accent text-white font-bold py-3 rounded-lg hover:bg-gold hover:text-primary transition-all duration-300 shadow-xl transform hover:scale-[1.02] active:scale-[0.98] focus:ring-4 focus:ring-accent/50">
+                                Enviar Mensaje
+                            </button>
+                            <p class="text-xs text-center text-gray-400 mt-4">Los mensajes se procesan a través de Formspree.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-500 py-8 text-center border-t border-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-2xl hover:text-white transition"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-2xl hover:text-white transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-2xl hover:text-white transition"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p>&copy; 2025 Iglesia del Evangelio de Dios. Todos los derechos reservados.</p>
+            <p class="text-xs mt-2">Diseñado para la Gloria de Dios. <span class="text-accent">¡Recuerda configurar tu Formspree ID!</span></p>
+        </div>
+    </footer>
+
+    <!-- Scripts JS -->
+    <script>
+        // Menú Móvil
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => { 
+            mobileMenu.classList.toggle('hidden'); 
+            const icon = mobileMenuButton.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // Cerrar menú al hacer click en links
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        menuLinks.forEach(link => { 
+            link.addEventListener('click', () => { 
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.querySelector('i').classList.remove('fa-times');
+                mobileMenuButton.querySelector('i').classList.add('fa-bars');
+            }); 
+        });
+
+        // Navbar Change on Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('py-2');
+                header.classList.remove('bg-primary/95');
+                header.classList.add('bg-primary/100');
+            } else {
+                header.classList.remove('py-2');
+                header.classList.add('bg-primary/95');
+                header.classList.remove('bg-primary/100');
+            }
+        });
+    </script>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script>
+        // Inicialización de Swiper para Videos
+        const videosSwiper = new Swiper(".videosSwiper", {
+            slidesPerView: 1,
+            spaceBetween: 0,
+            loop: true,
+            effect: 'fade', // Efecto suave
+            fadeEffect: { crossFade: true },
+            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+        });
+
+        // Inicialización de Swiper para Galería
+        const gallerySwiper = new Swiper(".gallerySwiper", {
+            slidesPerView: 1,
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: { el: ".swiper-pagination", clickable: true },
+        });
+    </script>
+</body>
+</html>
